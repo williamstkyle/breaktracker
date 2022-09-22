@@ -100,8 +100,7 @@
   <div id="CurrentBreak" class="gwd-div-1kh0">Current Break 00:00</div>
   <form class="gwd-input-1e8j" id="breakhistory">
     Break History: <br>
-    <textarea rows="5" cols="40" name="BreakHistory" spellcheck="false">
-      Last Break Length
+    <textarea rows="5" cols="40" name="BreakHistory" spellcheck="false" autocomplete="off">
     </textarea>
   </form>
   <script>
@@ -118,7 +117,8 @@
       mins = 0,
       remain = 0;
     var breaktotal = 1800; //30 minutes in seconds
-    var i = 0;
+    var i = 1;
+    var breaklist = '';
     breakoutbutton.disabled = true;
 
     function BreakIn() {
@@ -153,7 +153,7 @@
         if (secs < 10) {
           secs = "0" + secs;
         }
-        totalbreak.innerHTML = 'Total Break Left ' + mins + ':' + secs;
+        totalbreak.innerHTML = 'Total Break Remaining ' + mins + ':' + secs;
 
         //add seconds to Current Break
         remain = sec;
@@ -177,7 +177,9 @@
       breakinbutton.disabled = false;
       breakoutbutton.disabled = true;
       //clear current break and stop countdown
-      breakhistory[0].value = 'Last Break length ' + mins + ':' + secs;
+      breaklist += i + '. Break length ' + mins + ':' + secs + '\n';
+      i++;
+      breakhistory[0].value = breaklist;
       ms = 0;
       sec = 0;
       currentbreak.innerHTML = 'Current Break 00:00'
