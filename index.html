@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Test Site</title>
+  <title>30 Minute Break Tracker</title>
   <meta name="generator" content="Google Web Designer 15.0.0.0913">
   <style id="gwd-text-style">
     p {
@@ -54,8 +54,9 @@
       background-color: rgb(241, 142, 10);
       position: absolute;
       text-align: center;
-      font-size: 23px;
       transform-origin: 50% 50% 0px;
+      font-size: 23px;
+
       height: 37px;
       width: 284px;
       left: 668px;
@@ -66,14 +67,15 @@
       background-image: none;
       background-color: rgb(241, 142, 10);
       position: absolute;
-      transform-origin: 50% 50% 0px;
-      height: 37px;
-      top: 322px;
       text-align: center;
-      line-height: 33px;
+      transform-origin: 50% 50% 0px;
       font-size: 23px;
-      width: 284px;
-      left: 308px;
+
+      height: 37px;
+      width: 350px;
+      left: 260px;
+      top: 322px;
+      line-height: 33px;
     }
     .gwd-input-1e8j {
       position: absolute;
@@ -94,8 +96,8 @@
 <body class="htmlNoPages">
   <button id="BreakIn" class="gwd-button-1j1n" data-gwd-name="BreakIn" onclick="BreakIn()">Go on break</button>
   <button id="BreakOut" class="gwd-button-6xgg" data-gwd-name="BreakOut" onclick="BreakOut()">Come back from break</button>
-  <div id="TotalBreak" class="gwd-div-1vu9">Total Break Left: 00:00</div>
-  <div id="CurrentBreak" class="gwd-div-1kh0">Current Break: 00:00</div>
+  <div id="TotalBreak" class="gwd-div-1vu9">Total Break Remaining 00:00</div>
+  <div id="CurrentBreak" class="gwd-div-1kh0">Current Break 00:00</div>
   <form class="gwd-input-1e8j" id="breakhistory">
     Break History: <br>
     <textarea rows="5" cols="40" name="BreakHistory" spellcheck="false">
@@ -151,7 +153,7 @@
         if (secs < 10) {
           secs = "0" + secs;
         }
-        totalbreak.innerHTML = 'Total Break Left: ' + mins + ':' + secs;
+        totalbreak.innerHTML = 'Total Break Left ' + mins + ':' + secs;
 
         //add seconds to Current Break
         remain = sec;
@@ -165,7 +167,7 @@
         if (secs < 10) {
           secs = "0" + secs;
         }
-        currentbreak.innerHTML = 'Current Break: ' + mins + ':' + secs;
+        currentbreak.innerHTML = 'Current Break ' + mins + ':' + secs;
 
         BreakIn();
       }, 10);
@@ -175,10 +177,10 @@
       breakinbutton.disabled = false;
       breakoutbutton.disabled = true;
       //clear current break and stop countdown
-      breakhistory[0].value = 'Last Break length:' + mins + ':' + secs;
+      breakhistory[0].value = 'Last Break length ' + mins + ':' + secs;
       ms = 0;
       sec = 0;
-      currentbreak.innerHTML = 'Current Break: 00:00'
+      currentbreak.innerHTML = 'Current Break 00:00'
       clearTimeout(timeoutId)
     }
   </script>
