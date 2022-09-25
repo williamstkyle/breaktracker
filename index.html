@@ -93,8 +93,8 @@
 <body>
  <button id="BreakIn" class="gwd-button-1j1n" data-gwd-name="BreakIn" onclick="BreakIn()">Go on break</button>
  <button id="BreakOut" class="gwd-button-6xgg" data-gwd-name="BreakOut" onclick="BreakOut()">Come back from break</button>
- <div id="TotalBreak" class="gwd-div-1vu9">Total Break Left: 30:00</div>
- <div id="CurrentBreak" class="gwd-div-1kh0">Current Break: 00:00</div>
+ <div id="TotalBreak" class="gwd-div-1vu9">Total Break Left 30:00</div>
+ <div id="CurrentBreak" class="gwd-div-1kh0">Current Break 00:00</div>
 
  <form class="gwd-input-1e8j" id="breakhistory">
     Break History: <br>
@@ -111,17 +111,40 @@
      var i = 1;
      var total_break = 1800; //30 minuntes in seconds
      var remain, mins, secs, convert_sec;
+     var now = null;
+
      function BreakIn()
      {
       now = new Date()
+      BreakTimer();
+
+     }
+
+     function BreakTimer(){
+      timeoutId = setTimeout(function() 
+      {
+       current = new Date()
+       in_progress_time = new Date(current - now)
+       current_min = in_progress_time.getMinutes()
+       current_sec = in_progress_time.getSeconds()
+       if (current_min < 10) { current_min = "0" + current_min}
+       if (current_sec < 10) { current_sec = "0" + current_sec}
+       currentbreak.innerHTML =  'Current Break ' + current_min + ':' + current_sec
+       BreakTimer();
+
+      }, 10);
+
      }
 
      function BreakOut()
      {
       later = new Date()
-      elapsed = later - now
-      elapsed_time = new Date(elapsed)
-      breaklist += i + '. Last Break ' + elapsed_time.getMinutes() + ':' + elapsed_time.getSeconds() + '\n'  
+      elapsed_time = new Date(later - now)
+      elapsed_min = elapsed_time.getMinutes()
+      elapsed_sec = elapsed_time.getSeconds() 
+      if (elapsed_min < 10) { elapsed_min = "0" + elapsed_min}
+      if (elapsed_sec< 10) { elapsed_sec = "0" + elapsed_sec}
+      breaklist += i + '. Break Duration ' + elapsed_min + ':' + elapsed_sec + '\n'  
       breakhistory[0].value =  breaklist
       i ++;
 
@@ -138,6 +161,8 @@
           secs = "0" + secs;
         }
       totalbreak.innerHTML = 'Total Break Left ' + mins + ':' + secs;
+      clearTimeout(timeoutId);
+      currentbreak.innerHTML = 'Current Break 00:00'
      }
   </script>
 </body>
