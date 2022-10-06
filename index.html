@@ -1,169 +1,343 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WB Break Tracker</title>
-    <style id="gwd-text-style">
-        p {
-          margin: 0px;
-        }
-        h1 {
-          margin: 0px;
-        }
-        h2 {
-          margin: 0px;
-        }
-        h3 {
-          margin: 0px;
-        }
-      </style>
-      <style>
-        html, body {
-          width: 100%;
-          height: 100%;
-          margin: 0px;
-        }
-        body {
-          background-color: transparent;
-          transform: perspective(1400px) matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-          transform-style: preserve-3d;
-        }
-        body * {
-          transform-style: preserve-3d;
-        }
-        .gwd-button-1j1n {
-          position: absolute;
-          transform-origin: 115px 52.5px 0px;
-          width: 230px;
-          height: 100px;
-          left: 308px;
-          top: 150px;
-        }
-        .gwd-button-6xgg {
-          position: absolute;
-          transform-origin: 115px 52.5px 0px;
-          width: 230px;
-          height: 100px;
-          left: 700px;
-          top: 150px;
-        }
-        .gwd-div-1kh0 {
-          background-image: none;
-          background-color: rgb(241, 142, 10);
-          position: absolute;
-          text-align: center;
-          font-size: 23px;
-          transform-origin: 50% 50% 0px;
-          height: 37px;
-          width: 284px;
-          left: 668px;
-          top: 322px;
-          line-height: 33px;
-        }
-        .gwd-div-1vu9 {
-          background-image: none;
-          background-color: rgb(241, 142, 10);
-          position: absolute;
-          transform-origin: 50% 50% 0px;
-          height: 37px;
-          top: 322px;
-          text-align: center;
-          line-height: 33px;
-          font-size: 23px;
-          width: 284px;
-          left: 308px;
-        }
-        .gwd-input-1e8j {
-          position: absolute;
-          left: 695px;
-          top: 430px;
-          width: 222px;
-          height: 94px;
-          transform-origin: 50% 50% 0px;
-        }
-        @media (width: 1207px) and (height: 815px) {
-          .gwd-button-1j1n {
-            transform: translate3d(664px, 187px, 0px) rotateZ(-0.533292deg);
-          }
-        }
-      </style>
-</head>
-<body>
- <button id="BreakIn" class="gwd-button-1j1n" data-gwd-name="BreakIn" onclick="BreakIn()">Go on break</button>
- <button id="BreakOut" class="gwd-button-6xgg" data-gwd-name="BreakOut" onclick="BreakOut()">Come back from break</button>
- <div id="TotalBreak" class="gwd-div-1vu9">Total Break Left 30:00</div>
- <div id="CurrentBreak" class="gwd-div-1kh0">Current Break 00:00</div>
-
- <form class="gwd-input-1e8j" id="breakhistory">
-    Break History: <br>
-  <textarea rows="5" cols="40" name="BreakHistory" spellcheck="false">
-      Last Break Length
-  </textarea>
- </form>
-
-  <script>
-     var breakhistory = document.getElementById("breakhistory")
-     var totalbreak = document.getElementById("TotalBreak")
-     var currentbreak = document.getElementById("CurrentBreak")
-     var breaklist = '';
-     var i = 1;
-     var total_break = 1800; //30 minuntes in seconds
-     var remain, mins, secs, convert_sec;
-     var now = null;
-
-     function BreakIn()
-     {
-      now = new Date()
-      BreakTimer();
-
-     }
-
-     function BreakTimer(){
-      timeoutId = setTimeout(function() 
+<meta charset="utf-8">
+<title>Untitled Page</title>
+<meta name="generator" content="WYSIWYG Web Builder 17 Trial Version - https://www.wysiwygwebbuilder.com">
+<link href="css/BreakTracker.css" rel="stylesheet">
+<link href="css/index.css" rel="stylesheet">
+<script>
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var shapePath = document.querySelector('#MorphingIcon1-shape');
+   var paths = ["M210 0 L419 162 L210 324 L0 162Z "];
+   var interpolator = [];
+   interpolator[0] = polymorph.interpolate([paths[0], paths[0]]);
+   let progress = { prop: 0 };
+   var pathIndex = 0;
+   anime({
+      targets: progress,
+      prop: 1,
+      delay: 0,
+      duration: 2000,
+      easing: 'linear',
+      loop: true,
+      direction: 'normal',
+      update(anim) 
       {
-       current = new Date()
-       in_progress_time = new Date(current - now)
-       current_min = in_progress_time.getMinutes()
-       current_sec = in_progress_time.getSeconds()
-       if (current_min < 10) { current_min = "0" + current_min}
-       if (current_sec < 10) { current_sec = "0" + current_sec}
-       currentbreak.innerHTML =  'Current Break ' + current_min + ':' + current_sec
+         shapePath.setAttribute('d', interpolator[pathIndex](progress.prop));
+         if (anim.progress == 100)
+         {
+            pathIndex++;
+            if (pathIndex > 0)
+               pathIndex = 0;
+         }
+      }
+   });
+});
+
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var shapePath = document.querySelector('#MorphingIcon2-shape');
+   var paths = ["M210 0 L419 162 L210 324 L0 162Z "];
+   var interpolator = [];
+   interpolator[0] = polymorph.interpolate([paths[0], paths[0]]);
+   let progress = { prop: 0 };
+   var pathIndex = 0;
+   anime({
+      targets: progress,
+      prop: 1,
+      delay: 0,
+      duration: 2000,
+      easing: 'linear',
+      loop: true,
+      direction: 'normal',
+      update(anim) 
+      {
+         shapePath.setAttribute('d', interpolator[pathIndex](progress.prop));
+         if (anim.progress == 100)
+         {
+            pathIndex++;
+            if (pathIndex > 0)
+               pathIndex = 0;
+         }
+      }
+   });
+});
+
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var shapePath = document.querySelector('#MorphingIcon3-shape');
+   var paths = ["M210 0 L419 162 L210 324 L0 162Z "];
+   var interpolator = [];
+   interpolator[0] = polymorph.interpolate([paths[0], paths[0]]);
+   let progress = { prop: 0 };
+   var pathIndex = 0;
+   anime({
+      targets: progress,
+      prop: 1,
+      delay: 0,
+      duration: 2000,
+      easing: 'linear',
+      loop: true,
+      direction: 'normal',
+      update(anim) 
+      {
+         shapePath.setAttribute('d', interpolator[pathIndex](progress.prop));
+         if (anim.progress == 100)
+         {
+            pathIndex++;
+            if (pathIndex > 0)
+               pathIndex = 0;
+         }
+      }
+   });
+});
+
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var shapePath = document.querySelector('#MorphingIcon4-shape');
+   var paths = ["M210 0 L419 162 L210 324 L0 162Z "];
+   var interpolator = [];
+   interpolator[0] = polymorph.interpolate([paths[0], paths[0]]);
+   let progress = { prop: 0 };
+   var pathIndex = 0;
+   anime({
+      targets: progress,
+      prop: 1,
+      delay: 0,
+      duration: 2000,
+      easing: 'linear',
+      loop: true,
+      direction: 'normal',
+      update(anim) 
+      {
+         shapePath.setAttribute('d', interpolator[pathIndex](progress.prop));
+         if (anim.progress == 100)
+         {
+            pathIndex++;
+            if (pathIndex > 0)
+               pathIndex = 0;
+         }
+      }
+   });
+});
+
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var shapePath = document.querySelector('#MorphingIcon5-shape');
+   var paths = ["M198 0 L396 153 L198 306 L0 153Z "];
+   var interpolator = [];
+   interpolator[0] = polymorph.interpolate([paths[0], paths[0]]);
+   let progress = { prop: 0 };
+   var pathIndex = 0;
+   anime({
+      targets: progress,
+      prop: 1,
+      delay: 0,
+      duration: 2000,
+      easing: 'linear',
+      loop: true,
+      direction: 'normal',
+      update(anim) 
+      {
+         shapePath.setAttribute('d', interpolator[pathIndex](progress.prop));
+         if (anim.progress == 100)
+         {
+            pathIndex++;
+            if (pathIndex > 0)
+               pathIndex = 0;
+         }
+      }
+   });
+});
+
+document.addEventListener('DOMContentLoaded', function(event)
+{
+   var shapePath = document.querySelector('#MorphingIcon6-shape');
+   var paths = ["M198 0 L396 153 L198 306 L0 153Z "];
+   var interpolator = [];
+   interpolator[0] = polymorph.interpolate([paths[0], paths[0]]);
+   let progress = { prop: 0 };
+   var pathIndex = 0;
+   anime({
+      targets: progress,
+      prop: 1,
+      delay: 0,
+      duration: 2000,
+      easing: 'linear',
+      loop: true,
+      direction: 'normal',
+      update(anim) 
+      {
+         shapePath.setAttribute('d', interpolator[pathIndex](progress.prop));
+         if (anim.progress == 100)
+         {
+            pathIndex++;
+            if (pathIndex > 0)
+               pathIndex = 0;
+         }
+      }
+   });
+});
+
+
+</script>
+</head>
+
+<body>
+   <div id="PageHeader1" style="position:absolute;text-align:left;left:0px;top:0px;width:100%;height:105px;z-index:7777;">
+      <div id="wb_Text1" style="position:absolute;left:22px;top:7px;width:100%;height:91px;text-align:center;z-index:0;">
+      <span style="color:#000000;font-family:Impact;font-size:75px;"><strong>30 MINUTE BREAK TRACKER</strong></span></div>
+   </div>
+   <div id="main" style="position:relative;left:25%;top:0px;width:100%;height:100%;">
+   <div id="wb_MorphingIcon1" style="position:absolute;left:22px;top:327px;width:419px;height:324px;z-index:3;">
+      <svg id="MorphingIcon1" height="100%" width="100%" style="position:absolute;height:100%;width:100%;left:0;top:0;overflow:visible;" viewBox="0 0 419 324" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+      <path id="MorphingIcon1-shape" d="M210 0 L419 162 L210 324 L0 162Z " vector-effect="non-scaling-stroke" />
+      </defs>
+      <use xlink:href="#MorphingIcon1-shape" data-href="#MorphingIcon1-shape" style="fill:#FFA500;stroke:#0963AD;stroke-width:1"/>
+      </svg>
+   </div>
+   <div id="wb_MorphingIcon2" style="position:absolute;left:529px;top:327px;width:419px;height:324px;z-index:4;">
+         <svg id="MorphingIcon2" height="100%" width="100%" style="position:absolute;height:100%;width:100%;left:0;top:0;overflow:visible;" viewBox="0 0 419 324" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+               <path id="MorphingIcon2-shape" d="M210 0 L419 162 L210 324 L0 162Z " vector-effect="non-scaling-stroke" />
+            </defs>
+            <use xlink:href="#MorphingIcon2-shape" data-href="#MorphingIcon2-shape" style="fill:#FFA500;stroke:#0963AD;stroke-width:1"/>
+         </svg>
+   </div>
+   <div id="wb_MorphingIcon3" style="position:absolute;left:276px;top:137px;width:419px;height:324px;z-index:5;">
+      <svg id="MorphingIcon3" height="100%" width="100%" style="position:absolute;height:100%;width:100%;left:0;top:0;overflow:visible;" viewBox="0 0 419 324" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+         <defs>
+            <path id="MorphingIcon3-shape" d="M210 0 L419 162 L210 324 L0 162Z " vector-effect="non-scaling-stroke" />
+         </defs>
+         <use xlink:href="#MorphingIcon3-shape" data-href="#MorphingIcon3-shape" style="fill:#FFA500;stroke:#0963AD;stroke-width:1"/>
+      </svg>
+   </div>
+   <div id="wb_MorphingIcon4" style="position:absolute;left:276px;top:510px;width:419px;height:324px;z-index:6;">
+      <svg id="MorphingIcon4" height="100%" width="100%" style="position:absolute;height:100%;width:100%;left:0;top:0;overflow:visible;" viewBox="0 0 419 324" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+         <defs>
+            <path id="MorphingIcon4-shape" d="M210 0 L419 162 L210 324 L0 162Z " vector-effect="non-scaling-stroke" />
+         </defs>
+         <use xlink:href="#MorphingIcon4-shape" data-href="#MorphingIcon4-shape" style="fill:#FFA500;stroke:#0963AD;stroke-width:1"/>
+      </svg>
+   </div>
+   <div id="wb_Text2" style="position:absolute;left:398px;top:208px;width:175px;height:21px;text-align:center;z-index:7;">
+      <span style="color:#000000;font-family:Arial;font-size:19px;"><strong>TOTAL REMAINING</strong></span></div>
+   <div id="wb_Text3" style="position:absolute;left:403px;top:572px;width:164px;height:21px;text-align:center;z-index:8;">
+      <span style="color:#000000;font-family:Arial;font-size:19px;"><strong>CURRENT BREAK</strong></span></div>
+   <div id="wb_Text4" style="position:absolute;left:171px;top:435px;width:121px;height:72px;z-index:9;">
+      <span style="color:#000000;font-family:Arial;font-size:32px;"><strong>GO ON BREAK</strong></span></div>
+   <div id="wb_Text5" style="position:absolute;left:669px;top:418px;width:139px;height:107px;text-align:center;z-index:10;">
+      <span style="color:#000000;font-family:Arial;font-size:32px;"><strong>BACK FROM BREAK</strong></span></div>
+
+   <div id="wb_MorphingIcon5" style="position:absolute;left:33px;top:336px;width:396px;height:306px;z-index:11;">
+      <a href="#" onclick="BreakIn()">
+         <svg id="MorphingIcon5" height="100%" width="100%" style="position:absolute;height:100%;width:100%;left:0;top:0;overflow:visible;" viewBox="0 0 396 306" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+             <path id="MorphingIcon5-shape" d="M198 0 L396 153 L198 306 L0 153Z " vector-effect="non-scaling-stroke" />
+            </defs>
+            <use xlink:href="#MorphingIcon5-shape" data-href="#MorphingIcon5-shape" style="fill:none;stroke:#008000;stroke-width:1"/>
+         </svg>
+      </a>
+   </div>
+   <div id="wb_MorphingIcon6" style="position:absolute;left:540px;top:336px;width:396px;height:306px;z-index:12;">
+      <a href="#" onclick="BreakOut()">
+         <svg id="MorphingIcon6" height="100%" width="100%" style="position:absolute;height:100%;width:100%;left:0;top:0;overflow:visible;" viewBox="0 0 396 306" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+               <path id="MorphingIcon6-shape" d="M198 0 L396 153 L198 306 L0 153Z " vector-effect="non-scaling-stroke" />
+            </defs>
+            <use xlink:href="#MorphingIcon6-shape" data-href="#MorphingIcon6-shape" style="fill:none;stroke:#FF0000;stroke-width:1"/>
+         </svg>
+      </a>
+   </div>
+
+   <div id="TotalBreak" style="position:absolute;left:356px;top:252px;width:258px;height:104px;text-align:center;z-index:13;">
+      <span style="color:#000000;font-family:Impact;font-size:85px;">30:00</span></div>
+   <div id="CurrentBreak" style="position:absolute;left:388px;top:623px;width:195px;height:48px;text-align:center;z-index:14;">
+      <span style="color:#000000;font-family:Arial;font-size:43px;"><strong>00:00</strong></span></div>
+   <!-- 
+      <form class="breakhistory">
+   <textarea name="breakhistory" id="breakhistory" style="position:absolute;left:366px;top:671px;width:238px;height:67px;z-index:15;" rows="3" cols="27" spellcheck="false">Break History</textarea>
+   </form> -->
+
+   <form id="breakhistory" style="position:absolute;left:366px;top:671px;width:238px;height:67px;z-index:15;"> 
+      
+    <textarea rows="5" cols="40" name="BreakHistory" spellcheck="false">
+        Last Break Length
+    </textarea>
+   </form>
+</div>
+   <script>
+      var breakhistory = document.getElementById("breakhistory") //done
+      var totalbreak = document.getElementById("TotalBreak") //done
+      var currentbreak = document.getElementById("CurrentBreak") //done
+      var break_in_button = document.getElementById("wb_MorphingIcon5")
+      var break_out_button = document.getElementById("wb_MorphingIcon6")
+      var breaklist = '';
+      var i = 1;
+      var total_break = 1800; //30 minuntes in seconds
+      var remain, mins, secs, convert_sec;
+      var now = null;
+      function BreakIn()
+      {
+
+       now = new Date()
        BreakTimer();
-
-      }, 10);
-
-     }
-
-     function BreakOut()
-     {
-      later = new Date()
-      elapsed_time = new Date(later - now)
-      elapsed_min = elapsed_time.getMinutes()
-      elapsed_sec = elapsed_time.getSeconds() 
-      if (elapsed_min < 10) { elapsed_min = "0" + elapsed_min}
-      if (elapsed_sec< 10) { elapsed_sec = "0" + elapsed_sec}
-      breaklist += i + '. Break Duration ' + elapsed_min + ':' + elapsed_sec + '\n'  
-      breakhistory[0].value =  breaklist
-      i ++;
-
-      convert_sec = Math.round(elapsed_time.getTime() * .001);
-      total_break = total_break - convert_sec;
-      remain = total_break;
-      mins = Math.floor(remain / 60);
-      remain -= mins * 60;
-      secs = remain;
-      if (mins < 10) {
-          mins = "0" + mins;
-        }
-        if (secs < 10) {
-          secs = "0" + secs;
-        }
-      totalbreak.innerHTML = 'Total Break Left ' + mins + ':' + secs;
-      clearTimeout(timeoutId);
-      currentbreak.innerHTML = 'Current Break 00:00'
-     }
-  </script>
+       break_in_button.hidden = true;
+       break_out_button.hidden = false;
+ 
+      }
+ 
+      function BreakTimer(){
+       timeoutId = setTimeout(function() 
+       {
+        current = new Date()
+        in_progress_time = new Date(current - now)
+        current_min = in_progress_time.getMinutes()
+        current_sec = in_progress_time.getSeconds()
+        if (current_min < 10) { current_min = "0" + current_min}
+        if (current_sec < 10) { current_sec = "0" + current_sec}
+        currentbreak.innerHTML = "<span style='color:#000000;font-family:Arial;font-size:43px;'><strong> "+current_min+":"+current_sec+" </strong></span>";
+        //currentbreak.innerText =  current_min + ':' + current_sec
+        BreakTimer();
+ 
+       }, 10);
+ 
+      }
+ 
+      function BreakOut()
+      {
+       break_in_button.hidden = false;
+       break_out_button.hidden = true;
+       later = new Date()
+       elapsed_time = new Date(later - window.now)
+       elapsed_min = elapsed_time.getMinutes()
+       elapsed_sec = elapsed_time.getSeconds() 
+       if (elapsed_min < 10) { elapsed_min = "0" + elapsed_min}
+       if (elapsed_sec< 10) { elapsed_sec = "0" + elapsed_sec}
+       breaklist += i + '. Break Duration ' + elapsed_min + ':' + elapsed_sec + '\n'  
+       breakhistory[0].value =  breaklist
+       i ++;
+ 
+       convert_sec = Math.round(elapsed_time.getTime() * .001);
+       total_break = total_break - convert_sec;
+       remain = total_break;
+       mins = Math.floor(remain / 60);
+       remain -= mins * 60;
+       secs = remain;
+       if (mins < 10) {
+           mins = "0" + mins;
+         }
+         if (secs < 10) {
+           secs = "0" + secs;
+         }
+       totalbreak.innerHTML= "<span style='color:#000000;font-family:Impact;font-size:85px;'> "+mins+":"+secs+" </span>";
+       clearTimeout(timeoutId);
+       currentbreak.innerHTML = "<span style='color:#000000;font-family:Arial;font-size:43px;'><strong>00:00</strong></span>";
+       
+      }
+   </script>
 </body>
 </html>
