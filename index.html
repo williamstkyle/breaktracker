@@ -294,6 +294,7 @@ document.addEventListener('DOMContentLoaded', function(event)
         if (current_min < 10) { current_min = "0" + current_min} //add a 0 before the number if its less than 10, purely for cosmetic reasons
         if (current_sec < 10) { current_sec = "0" + current_sec}
         currentbreak.innerHTML = "<span style='color:#000000;font-family:Impact;font-size:85px;'>"+current_min+":"+current_sec+"</span>"; //updates text box with elapsed time, matching the formatting
+        BreakTimer();
        }, 10);
       }
  
