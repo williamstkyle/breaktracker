@@ -3,8 +3,6 @@
 <head>
 <meta charset="utf-8">
 <title>WB CC Break Tracker</title>
-<meta name="generator" content="WYSIWYG Web Builder 17 Trial Version - https://www.wysiwygwebbuilder.com">
-<link href="css/BreakTracker.css" rel="stylesheet">
 <link href="css/index.css" rel="stylesheet">
 <script>
 document.addEventListener('DOMContentLoaded', function(event)
@@ -265,73 +263,69 @@ document.addEventListener('DOMContentLoaded', function(event)
    </form>
 </div>
    <script>
-      var breakhistory = document.getElementById("breakhistory") //done
-      var totalbreak = document.getElementById("TotalBreak") //done
-      var currentbreak = document.getElementById("CurrentBreak") //done
-      var break_in_button = document.getElementById("wb_MorphingIcon5")
-      var break_out_button = document.getElementById("wb_MorphingIcon6")
-      var breaklist = '';
-      var i = 1;
-      var total_break = 1800; //30 minuntes in seconds
+      // turn buttons and text fields into variables
+      var breakhistory = document.getElementById("breakhistory"),
+           totalbreak = document.getElementById("TotalBreak"), 
+           currentbreak = document.getElementById("CurrentBreak"), 
+           break_in_button = document.getElementById("wb_MorphingIcon5"),
+           break_out_button = document.getElementById("wb_MorphingIcon6");
+      var breaklist = '', i = 1, now = null;
       var remain, mins, secs, convert_sec;
-      var now = null;
-      function BreakIn()
-      {
+      var total_break = 1800; //30 minuntes in seconds
+      
 
-       now = new Date()
-       BreakTimer();
+      function BreakIn(){
+       now = new Date() //grab the time when button is hit
+       BreakTimer(); // start counting from this time, on
        break_in_button.hidden = true;
        break_out_button.hidden = false;
- 
       }
  
       function BreakTimer(){
        timeoutId = setTimeout(function() 
        {
-        current = new Date()
-        in_progress_time = new Date(current - now)
-        current_min = in_progress_time.getMinutes()
-        current_sec = in_progress_time.getSeconds()
-        if (current_min < 10) { current_min = "0" + current_min}
+         //grabs the current time, subtracts it from the time the button was clicked, updates text box, then does it again
+         //this could also just be done once when "break out" was pressed but, since I wanted a timer it has to be ran every second
+
+        current = new Date() //grab current time
+        in_progress_time = new Date(current - now) //amount of time between when button was hit and now
+        current_min = in_progress_time.getMinutes() //convert to minutes
+        current_sec = in_progress_time.getSeconds() //convert to seconds
+        if (current_min < 10) { current_min = "0" + current_min} //add a 0 before the number if its less than 10, purely for cosmetic reasons
         if (current_sec < 10) { current_sec = "0" + current_sec}
-        currentbreak.innerHTML = "<span style='color:#000000;font-family:Impact;font-size:85px;'>"+current_min+":"+current_sec+"</span>";
-        //currentbreak.innerText =  current_min + ':' + current_sec
-        BreakTimer();
- 
+        currentbreak.innerHTML = "<span style='color:#000000;font-family:Impact;font-size:85px;'>"+current_min+":"+current_sec+"</span>"; //updates text box with elapsed time, matching the formatting
        }, 10);
- 
       }
  
-      function BreakOut()
-      {
+      function BreakOut(){
+         //grabs the elapsed time from the BreakTimer function and
+         //1. adds it to the break history textbox list
+         //2. subtracts it from the overall total of 30 minutes
+         //3. resets both the current break timer and text box
+
        break_in_button.hidden = false;
        break_out_button.hidden = true;
-       later = new Date()
-       elapsed_time = new Date(later - window.now)
-       elapsed_min = elapsed_time.getMinutes()
-       elapsed_sec = elapsed_time.getSeconds() 
-       if (elapsed_min < 10) { elapsed_min = "0" + elapsed_min}
-       if (elapsed_sec< 10) { elapsed_sec = "0" + elapsed_sec}
-       breaklist += i + '. Break Duration ' + elapsed_min + ':' + elapsed_sec + '\n'  
+ 
+       //add the current break duration to a list, add that list to the history text box
+       breaklist += i + '. Break Duration ' + current_min + ':' + current_sec + '\n' 
        breakhistory[0].value =  breaklist
        i ++;
  
-       convert_sec = Math.round(elapsed_time.getTime() * .001);
-       total_break = total_break - convert_sec;
+       //the process above was just grabbing what was in the minute and second positon of the time, if we want to do math with it we have to convert it to a common demoninator of seconds
+       convert_sec = Math.floor(in_progress_time.getTime() * .001); //converts from miliseconds to seconds
+       total_break = total_break - convert_sec; //subtracts what the total remaining break is from what has elapsed on the current break
        remain = total_break;
-       mins = Math.floor(remain / 60);
-       remain -= mins * 60;
+       //now we have to convert it back to minutes
+       mins = Math.floor(remain / 60); //converts to minutes
+       remain -= mins * 60; //converts the leftover to seconds
        secs = remain;
-       if (mins < 10) {
-           mins = "0" + mins;
-         }
-         if (secs < 10) {
-           secs = "0" + secs;
-         }
+
+       if (mins < 10) { mins = "0" + mins; } //add a 0 before the number if its less than 10, purely for cosmetic reasons
+       if (secs < 10) { secs = "0" + secs; }
+
        totalbreak.innerHTML= "<span style='color:#000000;font-family:Impact;font-size:85px;'> "+mins+":"+secs+" </span>";
-       clearTimeout(timeoutId);
+       clearTimeout(timeoutId); //reset the timer back to 0
        currentbreak.innerHTML = "<span style='color:#000000;font-family:Impact;font-size:85px;'>00:00</span>";
-       
       }
    </script>
 </body>
