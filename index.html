@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function(event)
          </svg>
       </a>
    </div>
-   <div id="wb_MorphingIcon6" style="position:absolute;left:540px;top:336px;width:396px;height:306px;z-index:12;">
+   <div id="wb_MorphingIcon6" style="position:absolute;left:540px;top:336px;width:396px;height:306px;z-index:12;" hidden="true">
       <a href="#" onclick="BreakOut()">
          <svg id="MorphingIcon6" height="100%" width="100%" style="position:absolute;height:100%;width:100%;left:0;top:0;overflow:visible;" viewBox="0 0 396 306" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <defs>
@@ -255,15 +255,10 @@ document.addEventListener('DOMContentLoaded', function(event)
 
    <div id="TotalBreak" style="position:absolute;left:356px;top:252px;width:258px;height:104px;text-align:center;z-index:13;">
       <span style="color:#000000;font-family:Impact;font-size:85px;">30:00</span></div>
-   <div id="CurrentBreak" style="position:absolute;left:388px;top:623px;width:195px;height:48px;text-align:center;z-index:14;">
-      <span style="color:#000000;font-family:Arial;font-size:43px;"><strong>00:00</strong></span></div>
-   <!-- 
-      <form class="breakhistory">
-   <textarea name="breakhistory" id="breakhistory" style="position:absolute;left:366px;top:671px;width:238px;height:67px;z-index:15;" rows="3" cols="27" spellcheck="false">Break History</textarea>
-   </form> -->
+   <div id="CurrentBreak" style="position:absolute;left:360px;top:623px;width:195px;height:48px;text-align:center;z-index:14;">
+      <span style="color:#000000;font-family:Impact;font-size:85px;">00:00</span></div>
 
-   <form id="breakhistory" style="position:absolute;left:366px;top:671px;width:238px;height:67px;z-index:15;"> 
-      
+   <form id="breakhistory" style="position:absolute;left:700px;top:671px;width:238px;height:67px;z-index:15;"> 
     <textarea rows="5" cols="40" name="BreakHistory" spellcheck="false">
         Last Break Length
     </textarea>
@@ -299,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function(event)
         current_sec = in_progress_time.getSeconds()
         if (current_min < 10) { current_min = "0" + current_min}
         if (current_sec < 10) { current_sec = "0" + current_sec}
-        currentbreak.innerHTML = "<span style='color:#000000;font-family:Arial;font-size:43px;'><strong> "+current_min+":"+current_sec+" </strong></span>";
+        currentbreak.innerHTML = "<span style='color:#000000;font-family:Impact;font-size:85px;'>"+current_min+":"+current_sec+"</span>";
         //currentbreak.innerText =  current_min + ':' + current_sec
         BreakTimer();
  
@@ -335,7 +330,7 @@ document.addEventListener('DOMContentLoaded', function(event)
          }
        totalbreak.innerHTML= "<span style='color:#000000;font-family:Impact;font-size:85px;'> "+mins+":"+secs+" </span>";
        clearTimeout(timeoutId);
-       currentbreak.innerHTML = "<span style='color:#000000;font-family:Arial;font-size:43px;'><strong>00:00</strong></span>";
+       currentbreak.innerHTML = "<span style='color:#000000;font-family:Impact;font-size:85px;'>00:00</span>";
        
       }
    </script>
